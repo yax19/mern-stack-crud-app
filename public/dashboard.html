@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <h2>WORKOUT TRACKER</h2>
+    <button id="addBtn">+ Add Workout</button>
+    <div id="workoutsList"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <input id="workoutName" placeholder="Workout Name" />
+    <select id="workoutType">
+      <option>Strength</option>
+      <option>Cardio</option>
+    </select>
+    <input id="sets" type="number" placeholder="Sets (optional)" />
+    <input id="reps" type="number" placeholder="Reps (optional)" />
+    <input id="duration" type="number" placeholder="Duration (min, optional)" />
+    <button onclick="saveWorkout()">Save</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

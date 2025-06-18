@@ -10,7 +10,7 @@
   <div class="container">
     <h1>PERSONAL<br>TRAINING</h1>
     <form id="loginForm">
-      <input type="user" placeholder="User Name" id="user" required />
+      <input type="email" placeholder="email" id="email" required />
       <input type="password" placeholder="Password" id="password" required />
       <button type="submit">Log In</button>
    <button id="signupBtn">Sign Up</button>
@@ -19,9 +19,13 @@
   document.getElementById('signupBtn').addEventListener('click', () => {
     window.location.href = 'signup.html';
   });
+
+   document.getElementById('submit').addEventListener('click', () => {
+    window.location.href = 'dashboard.html';
+  });
 </script>
     </form>
   </div>
-  <script src="app.js"></script>
+  <script src="login.js"></script>
 </body>
 </html>
