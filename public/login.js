@@ -1,34 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('loginForm');
+  const form = document.getElementById('loginForm');
+  const errorEl = document.getElementById('error');
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
 
-      try {
-        const res = await fetch('http://localhost:3000/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
+    try {
+      const res = await fetch('/api/auth/signin', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password })
+});
 
-        const data = await res.json();
+      const data = await res.json();
 
-        if (res.ok) {
-          localStorage.setItem('token', data.token);
-          window.location.href = 'dashboard.html';
-        } else {
-          alert(data.msg || 'Login failed');
-        }
-      } catch (err) {
-        console.error('Error:', err);
-        alert('Something went wrong');
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        window.location.href = 'dashboard.html';
+      } else {
+        errorEl.textContent = data.msg || 'Login failed';
       }
-    });
-  } else {
-    console.error('Form with id="loginForm" was not found in the DOM');
-  }
+    } catch (err) {
+      console.error(err);
+      errorEl.textContent = 'Error connecting to server';
+    }
+  });
 });

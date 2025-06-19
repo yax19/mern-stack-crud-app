@@ -3,29 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personal Training - Login</title>
-  <link rel="stylesheet" href="src/index.css" />
+  <title>Login | Personal Trainer App</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>PERSONAL<br>TRAINING</h1>
+    <h2>Welcome Back</h2>
     <form id="loginForm">
-      <input type="email" placeholder="email" id="email" required />
-      <input type="password" placeholder="Password" id="password" required />
-      <button type="submit">Log In</button>
-   <button id="signupBtn">Sign Up</button>
-
-<script>
-  document.getElementById('signupBtn').addEventListener('click', () => {
-    window.location.href = 'signup.html';
-  });
-
-   document.getElementById('submit').addEventListener('click', () => {
-    window.location.href = 'dashboard.html';
-  });
-</script>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Sign In</button>
     </form>
+    <p id="error" class="error-msg"></p>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
   </div>
+
   <script src="login.js"></script>
 </body>
 </html>
