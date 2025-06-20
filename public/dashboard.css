@@ -1,0 +1,48 @@
+/* Base styles */
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0a0f0d, #1a1a1a);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Sidebar stays the same */
+.sidebar {
+  background: #111;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 0 25px #00ff88;
+  min-width: 250px;
+  text-align: center;
+}
+
+/* Place modal (form) inside sidebar */
+#modal {
+  margin-top: 2rem;
+  background: #111;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #00ff88;
+  width: 100%;
+}
+
+input,
+select {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+}
