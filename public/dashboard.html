@@ -2,33 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard</title>
   <link rel="stylesheet" href="dashboard.css" />
 </head>
 <body>
-  <div class="container">
-    <h2>WORKOUT TRACKER</h2>
-    <button id="addBtn">+ Add Workout</button>
-    <div id="workoutList"></div>
-    <button id="logoutBtn">Logout</button>
-  </div>
+  <div class="dashboard">
 
-  <!-- Add Workout Modal -->
-<div id="modal">
-    <form id="workoutForm">
-      <input type="text" id="name" placeholder="Workout Name" required />
-      <select id="type">
-        <option value="Strength">Strength</option>
-        <option value="Cardio">Cardio</option>
-      </select>
-      <input type="number" id="sets" placeholder="Sets (if strength)" />
-      <input type="number" id="reps" placeholder="Reps (if strength)" />
-      <input type="text" id="duration" placeholder="Duration (if cardio)" />
-      <button type="submit">Save Workout</button>
-    </form>
+    <h2>Welcome Back! 💪</h2>
+
+  <div class="button-group">
+  <button id="addBtn" class="fancy-btn">+ Add Workout</button>
+  <button id="logoutBtn" class="fancy-btn logout">Logout</button>
+  
+</div>
+
+<div class="summary-widget" id="summaryWidget">
+  <h3>Summary</h3>
+  <p>Total Workouts: <span id="totalWorkouts">0</span></p>
+  <p>Total Sets: <span id="totalSets">0</span></p>
+  <p>Total Reps: <span id="totalReps">0</span></p>
+  <p>Total Duration: <span id="totalDuration">0</span> mins</p>
+</div>
+
+    <div id="workoutList" class="workout-cards"></div>
+
+<div class="recent-section">
+  <h3>Recent Workouts</h3>
+  <ul id="recentList"></ul>
+</div>
+
+    <!-- Modal Form -->
+    <div id="modal" class="modal hidden">
+      <form id="workoutForm">
+        <input type="text" id="name" placeholder="Workout Name" required />
+        <select id="type">
+          <option value="Strength">Strength</option>
+          <option value="Cardio">Cardio</option>
+        </select>
+        <input type="number" id="sets" placeholder="Sets (if strength)" />
+        <input type="number" id="reps" placeholder="Reps (if strength)" />
+        <input type="number" id="duration" placeholder="Duration (mins)" />
+        <button type="submit">Save Workout</button>
+      </form>
+    </div>
+  </div>
+  <div id="stopwatchModal" class="modal hidden">
+  <h3>⏱️ Stopwatch</h3>
+  <div id="timerDisplay">00:00:00</div>
+  <div class="stopwatch-controls">
+    <button id="startTimer">Start</button>
+    <button id="stopTimer">Stop</button>
+    <button id="resetTimer">Reset</button>
   </div>
 </div>
+
+    <div class="preset-routine">
+  <h3>🔥 Preset Full-Body Routine</h3>
+  <ul>
+    <li>✅ Push-ups – 3 sets x 15 reps</li>
+    <li>✅ Squats – 3 sets x 20 reps</li>
+    <li>✅ Plank – 3 sets x 1 min</li>
+    <li>✅ Jumping Jacks – 3 sets x 30 secs</li>
+  </ul>
+</div>
+
+<div class="quote-box">
+  <h3>💬 Daily Motivation</h3>
+  <p id="quoteText"></p>
+</div>
+
+  <!-- Bottom Navigation -->
+ <nav class="bottom-nav">
+  <a href="login.html">🏠 Home</a>
+  <button id="stopwatchBtn">⏱️</button>
+  <button>⚙️ Settings</button>
+</nav>
 
   <script src="dashboard.js"></script>
 </body>
