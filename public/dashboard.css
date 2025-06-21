@@ -1,156 +1,196 @@
+/* General Reset & Base Styles */
 body {
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  background:black;
-  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Dashboard Container */
 .dashboard {
-  padding: 2rem;
-  max-width: 600px;
-  margin: 0 auto;
+  width: 90%;
+  max-width: 800px;
+  margin-top: 2rem;
+  padding-bottom: 4rem;
 }
 
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
+/* Section Headers */
+h2, h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #00ffd5;
 }
 
-#workoutList {
+/* Summary Section */
+.summary, .recent, .quote, .workouts {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 255, 200, 0.2);
+}
+
+/* Workout Cards */
+.workout-cards {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
 }
 
 .workout-card {
-  background: #222;
+  background-color: rgba(255, 255, 255, 0.07);
   padding: 1rem;
-  border-radius: 10px;
-  width: calc(50% - 0.5rem);
-  box-shadow: 0 0 10px #00ff88;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 255, 150, 0.15);
 }
 
-.modal {
-  background: #1a1a1a;
-  padding: 1rem;
-  margin-top: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00ff88;
+/* Routine Dropdown */
+.routine-section {
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.hidden {
+#routineMenu {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  text-align: left;
+}
+
+#routineMenu.hidden {
   display: none;
 }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #1e1e1e;
-  display: flex;
-  justify-content: space-around;
-  padding: 1rem 0;
-  border-top: 1px solid #333;
+#routineMenu ul {
+  list-style: none;
+  padding-left: 0;
 }
 
-.bottom-nav button {
-  background: none;
-  color: #00ff88;
-  border: none;
-  font-size: 1.2rem;
+#routineMenu li {
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-fancy-btn {
-  background: linear-gradient(to right, #00ff88, #00c2ff);
+
+/* Glowing Buttons */
+.fancy-btn {
+  background: #00ffd5;
   color: #000;
-  padding: 0.7rem 1.5rem;
+  padding: 10px 20px;
+  margin: 0.5rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 25px;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 255, 136, 0.5);
-  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px #00ffd5;
 }
 
 .fancy-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 255, 136, 0.7);
+  background: #0ff;
+  box-shadow: 0 0 20px #00ffd5, 0 0 30px #00ffd5;
 }
 
 .logout {
-  background: linear-gradient(to right, #ff4d4d, #ff8080);
-  color: white;
+  background-color: #ff4e4e;
+  color: #fff;
+  box-shadow: 0 0 12px #ff4e4e;
 }
 
-#stopwatchModal {
-  background: #1c1c1c;
-  color: #fff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00ff88;
+.logout:hover {
+  background-color: #ff1c1c;
+  box-shadow: 0 0 20px #ff4e4e, 0 0 30px #ff4e4e;
+}
+
+.logout-container {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.9);
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bottom-nav a,
+.bottom-nav button {
+  background: none;
+  border: none;
+  color: #00ffd5;
+  font-size: 1.2rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.bottom-nav button:hover,
+.bottom-nav a:hover {
+  text-shadow: 0 0 10px #00ffd5;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dashboard {
+    width: 95%;
+  }
+}
+
+/* Stopwatch Modal */
+#stopwatchModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(20, 20, 20, 0.95);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 25px #00ffd5;
+  z-index: 10;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+#stopwatchModal h3 {
+  margin-bottom: 1rem;
+  color: #00ffd5;
 }
 
 #timerDisplay {
   font-size: 2rem;
   margin: 1rem 0;
-}
-
-.modal {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #1c1c1c;
   color: #fff;
-  padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00ff88;
-  text-align: center;
-  z-index: 1000;
-}
-
-.hidden {
-  display: none;
+  letter-spacing: 2px;
 }
 
 .stopwatch-controls button {
-  margin: 0.3rem;
-  padding: 0.5rem 1rem;
-  background: #00c2ff;
-  color: #000;
+  background: #00ffd5;
   border: none;
-  border-radius: 5px;
+  margin: 0.5rem;
+  padding: 10px 15px;
+  border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px #00ffd5;
 }
 
-.preset-routine {
-  background-color: #f2f2f2;
-  padding: 16px;
-  margin: 24px auto;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+.stopwatch-controls button:hover {
+  box-shadow: 0 0 15px #00ffd5, 0 0 25px #00ffd5;
 }
 
-.preset-routine h3 {
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.preset-routine ul {
-  list-style: none;
-  padding: 0;
-}
-
-.preset-routine li {
-  background-color: black;
-  padding: 8px 12px;
-  margin-bottom: 6px;
-  border-left: 5px solid #4caf50;
-  border-radius: 4px;
+/* Hide Modal */
+.modal.hidden {
+  display: none;
 }

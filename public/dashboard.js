@@ -1,177 +1,134 @@
-document.addEventListener('DOMContentLoaded', () => {
-const token = localStorage.getItem('token');
-if (!token) {
-  window.location.href = 'login.html';
-}
+document.addEventListener('DOMContentLoaded', function () {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    window.location.href = 'login.html';
+    return;
+  }
 
-const workoutList = document.getElementById('workoutList');
-const logoutBtn = document.getElementById('logoutBtn');
-const addBtn = document.getElementById('addBtn');
-const modal = document.getElementById('modal');
-const form = document.getElementById('workoutForm');
-const stopwatchBtn = document.getElementById('stopwatchBtn');
+  const logoutBtn = document.getElementById('logoutBtn');
+  const toggleRoutine = document.getElementById('toggleRoutine');
+  const routineMenu = document.getElementById('routineMenu');
+  const workoutList = document.getElementById('workoutList');
+  const stopwatchBtn = document.getElementById('stopwatchBtn');
 const stopwatchModal = document.getElementById('stopwatchModal');
+const timerDisplay = document.getElementById('timerDisplay');
+let timerInterval, hours = 0, minutes = 0, seconds = 0;
 
-// Fetch and display workouts
-async function fetchWorkouts() {
-  workoutList.innerHTML = '';
-
-  try {
-    const res = await fetch('/api/workouts', {
-      headers: { Authorization: 'Bearer ' + token }
-    });
-
-    const data = await res.json();
-
-    for (let i = 0; i < data.length; i++) {
-      const w = data[i];
-      const div = document.createElement('div');
-      div.className = 'workout-card';
-      div.innerHTML = 
-        '<strong>' + w.name + '</strong><br/>' +
-        (w.type === 'Strength'
-          ? w.sets + ' sets x ' + w.reps + ' reps'
-          : w.duration + ' mins');
-      workoutList.appendChild(div);
-    }
-
-    updateSummary(data);
-    updateRecent(data);
-    showQuote();
-    
-  } catch (err) {
-    console.error('Error loading workouts:', err);
-  }
-}
-
- form.addEventListener('submit', async function (e) {
-  e.preventDefault();
-
-  const workout = {
-    name: document.getElementById('name').value,
-    type: document.getElementById('type').value,
-    sets: document.getElementById('sets').value || null,
-    reps: document.getElementById('reps').value || null,
-    duration: document.getElementById('duration').value || null
-  };
-
-  try {
-    const res = await fetch('/api/workouts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + token
-      },
-      body: JSON.stringify(workout)
-    });
-
-    if (res.ok) {
-      modal.classList.add('hidden');
-      form.reset();
-      fetchWorkouts();
-    } else {
-      alert('Failed to save workout');
-    }
-  } catch (err) {
-    console.error('Error submitting workout:', err);
-    alert('Error submitting workout');
-  }
-});
-function updateSummary(data) {
-  let totalSets = 0;
-  let totalReps = 0;
-  let totalDuration = 0;
-
-  for (let i = 0; i < data.length; i++) {
-    const w = data[i];
-    if (w.sets) totalSets += w.sets;
-    if (w.reps) totalReps += w.reps;
-    if (w.duration) totalDuration += w.duration;
-  }
-
-  document.getElementById('totalWorkouts').textContent = data.length;
-  document.getElementById('totalSets').textContent = totalSets;
-  document.getElementById('totalReps').textContent = totalReps;
-  document.getElementById('totalDuration').textContent = totalDuration;
-}
-
-// Recent Workouts
-function updateRecent(data) {
-  const list = document.getElementById('recentList');
-  list.innerHTML = '';
-
-  const max = data.length < 3 ? data.length : 3;
-  for (let i = 0; i < max; i++) {
-    const w = data[i];
-    const li = document.createElement('li');
-    li.textContent = w.name + ' - ' + w.type;
-    list.appendChild(li);
-  }
-}
-
-function showQuote() {
-  const quotes = [
-    'Push yourself, because no one else is going to do it for you.',
-    'Don’t stop when you’re tired. Stop when you’re done.',
-    'Success starts with self-discipline.',
-    'The pain you feel today will be the strength you feel tomorrow.'
-  ];
-
-  const index = Math.floor(Math.random() * quotes.length);
-  document.getElementById('quoteText').textContent = quotes[index];
-}
-
-// Show/hide modal
-addBtn.addEventListener('click', function () {
-  modal.classList.toggle('hidden');
-});
-
-// Stopwatch modal toggle
-stopwatchBtn.addEventListener('click', function () {
+stopwatchBtn.addEventListener('click', () => {
   stopwatchModal.classList.toggle('hidden');
 });
 
-// Logout
-logoutBtn.addEventListener('click', function () {
-  localStorage.removeItem('token');
-  window.location.href = 'login.html';
+document.getElementById('startTimer').addEventListener('click', () => {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    seconds++;
+    if (seconds >= 60) {
+      seconds = 0;
+      minutes++;
+    }
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
+    }
+    timerDisplay.textContent =
+      String(hours).padStart(2, '0') + ':' +
+      String(minutes).padStart(2, '0') + ':' +
+      String(seconds).padStart(2, '0');
+  }, 1000);
 });
 
-// Stopwatch functionality
-let timerInterval;
-let seconds = 0;
+document.getElementById('stopTimer').addEventListener('click', () => {
+  clearInterval(timerInterval);
+});
 
-function updateTimerDisplay() {
-  const hrs = Math.floor(seconds / 3600);
-  const mins = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
+document.getElementById('resetTimer').addEventListener('click', () => {
+  clearInterval(timerInterval);
+  hours = minutes = seconds = 0;
+  timerDisplay.textContent = '00:00:00';
+});
 
-  document.getElementById('timerDisplay').textContent =
-    (hrs < 10 ? '0' + hrs : hrs) + ':' +
-    (mins < 10 ? '0' + mins : mins) + ':' +
-    (secs < 10 ? '0' + secs : secs);
-}
+  logoutBtn.addEventListener('click', function () {
+    localStorage.removeItem('token');
+    window.location.href = 'login.html';
+  });
 
-document.getElementById('startTimer').addEventListener('click', function () {
-  if (!timerInterval) {
-    timerInterval = setInterval(function () {
-      seconds++;
-      updateTimerDisplay();
-    }, 1000);
+  if (toggleRoutine && routineMenu) {
+    toggleRoutine.addEventListener('click', function () {
+      routineMenu.classList.toggle('hidden');
+    });
   }
-});
-document.getElementById('stopTimer').addEventListener('click', function () {
-  clearInterval(timerInterval);
-  timerInterval = null;
-});
 
-document.getElementById('resetTimer').addEventListener('click', function () {
-  clearInterval(timerInterval);
-  timerInterval = null;
-  seconds = 0;
-  updateTimerDisplay();
-});
+  async function fetchWorkouts() {
+    workoutList.innerHTML = '';
+    try {
+      const res = await fetch('/api/workouts', {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      });
+      const data = await res.json();
 
-// Load everything
-fetchWorkouts();
+      // Show workout cards
+      data.forEach(function (w) {
+        const card = document.createElement('div');
+        card.className = 'workout-card';
+
+        let content = '<strong>' + w.name + '</strong><br/>';
+        if (w.type === 'Strength') {
+          content += w.sets + ' sets x ' + w.reps + ' reps';
+        } else {
+          content += w.duration + ' mins';
+        }
+
+        card.innerHTML = content;
+        workoutList.appendChild(card);
+      });
+
+      updateSummary(data);
+      updateRecent(data);
+      showQuote();
+    } catch (err) {
+      console.error('Failed to load workouts:', err);
+    }
+  }
+
+  function updateSummary(data) {
+    let totalSets = 0;
+    let totalReps = 0;
+    let totalDuration = 0;
+
+    data.forEach(function (w) {
+      if (w.sets) totalSets += w.sets;
+      if (w.reps) totalReps += w.reps;
+      if (w.duration) totalDuration += w.duration;
+    });
+
+    document.getElementById('totalWorkouts').textContent = data.length;
+    document.getElementById('totalSets').textContent = totalSets;
+    document.getElementById('totalReps').textContent = totalReps;
+    document.getElementById('totalDuration').textContent = totalDuration;
+  }
+
+  function updateRecent(data) {
+    const list = document.getElementById('recentList');
+    list.innerHTML = '';
+    data.slice(0, 3).forEach(function (w) {
+      const li = document.createElement('li');
+      li.textContent = w.name + ' - ' + w.type;
+      list.appendChild(li);
+    });
+  }
+
+  function showQuote() {
+    const quotes = [
+      "Push yourself, because no one else is going to do it for you.",
+      "Don’t stop when you’re tired. Stop when you’re done.",
+      "Success starts with self-discipline.",
+      "The pain you feel today will be the strength you feel tomorrow."
+    ];
+    const quote = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById('quoteText').textContent = quote;
+  }
+
+  fetchWorkouts();
 });
