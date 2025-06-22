@@ -16,41 +16,39 @@
       <p>Total Workouts: <span id="totalWorkouts">0</span></p>
       <p>Total Sets: <span id="totalSets">0</span></p>
       <p>Total Reps: <span id="totalReps">0</span></p>
-      <p>Total Duration: <span id="totalDuration">0</span> mins</p>
+      <a href="challenge.html">🎯 Challenge</a>
     </section>
 
     <!-- Weekly Routine Dropdown -->
     <div class="routine-section">
       <button id="toggleRoutine">🗓️ Weekly Routine</button>
       <div id="routineMenu" class="hidden">
-        <ul>
-          <li>Monday - Chest & Triceps</li>
-          <li>Tuesday - Back & Biceps</li>
-          <li>Wednesday - Legs</li>
-          <li>Thursday - Shoulders</li>
-          <li>Friday - Cardio & Core</li>
-        </ul>
+       <ul class="weekly-list">
+  <li><span>Monday - Chest & Triceps</span> <span class="check" data-day="monday">❌</span></li>
+  <li><span>Tuesday - Back & Biceps</span> <span class="check" data-day="tuesday">❌</span></li>
+  <li><span>Wednesday - Legs</span> <span class="check" data-day="wednesday">❌</span></li>
+  <li><span>Thursday - Shoulders</span> <span class="check" data-day="thursday">❌</span></li>
+  <li><span>Friday - Cardio & Core</span> <span class="check" data-day="friday">❌</span></li>
+</ul>
       </div>
     </div>
 
-    <!-- Recent Workouts -->
-    <section class="recent">
-      <h3>Recent Workouts</h3>
-      <ul id="recentList"></ul>
-    </section>
+  <!-- Weekly Progress Section -->
+<div class="section progress-section">
+  <h3>Weekly Progress</h3>
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div id="progressFill" class="progress-fill"></div>
+    </div>
+  </div>
+</div>
 
-    <!-- Motivational Quote -->
-    <section class="quote">
-      <h3>Quote of the Day</h3>
-      <p id="quoteText">Loading...</p>
-    </section>
-
-    <!-- All Workouts (Card Style) -->
-    <section class="workouts">
-      <h3>Your Workouts</h3>
-      <div id="workoutList" class="workout-cards"></div>
-    </section>
-
+<!-- Workout Suggestion -->
+<div class="section suggestion-section">
+  <h3>Need a Workout?</h3>
+  <button id="suggestBtn" class="fancy-btn">🎯 Suggest Workout</button>
+  <p id="suggestionText" class="suggestion-text"></p>
+</div>
     <!-- Logout -->
     <div class="logout-container">
       <button id="logoutBtn" class="fancy-btn logout">Logout</button>
@@ -69,10 +67,11 @@
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-    <a href="login.html">🏠 Home</a>
-    <button id="stopwatchBtn">⏱️</button>
-    <button>⚙️ Settings</button>
-  </nav>
+  <a href="login.html">🏠 Home</a>
+  <button id="stopwatchBtn">⏱️</button>
+  <script src="challenge.js"></script>
+  <button id="themeToggle">🌗</button>
+</nav>
 
   <script src="dashboard.js"></script>
 </body>

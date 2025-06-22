@@ -5,6 +5,21 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
+  
+
+  const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+  document.body.classList.add('light-theme');
+}
+
+// Toggle theme
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light-theme');
+  const current = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+  localStorage.setItem('theme', current);
+});
+
   const logoutBtn = document.getElementById('logoutBtn');
   const toggleRoutine = document.getElementById('toggleRoutine');
   const routineMenu = document.getElementById('routineMenu');
@@ -45,6 +60,8 @@ document.getElementById('resetTimer').addEventListener('click', () => {
   clearInterval(timerInterval);
   hours = minutes = seconds = 0;
   timerDisplay.textContent = '00:00:00';
+
+  
 });
 
   logoutBtn.addEventListener('click', function () {
@@ -91,6 +108,27 @@ document.getElementById('resetTimer').addEventListener('click', () => {
       console.error('Failed to load workouts:', err);
     }
   }
+const checks = document.querySelectorAll('.check');
+const progressBar = document.querySelector('.progress-bar');
+const progressText = document.querySelector('.progress-text');
+
+function updateProgress() {
+  const checkedCount = document.querySelectorAll('.check.checked').length;
+  const totalDays = checks.length;
+  const percent = (checkedCount / totalDays) * 100;
+
+  progressBar.style.width = percent + '%';
+  progressText.textContent = checkedCount + '/' + totalDays + ' workouts this week';
+}
+
+checks.forEach(check => {
+  check.addEventListener('click', () => {
+    check.classList.toggle('checked');
+    check.textContent = check.classList.contains('checked') ? '✅' : '❌';
+    updateProgress();
+  });
+});
+  
 
   function updateSummary(data) {
     let totalSets = 0;
@@ -119,6 +157,8 @@ document.getElementById('resetTimer').addEventListener('click', () => {
     });
   }
 
+
+  
   function showQuote() {
     const quotes = [
       "Push yourself, because no one else is going to do it for you.",
