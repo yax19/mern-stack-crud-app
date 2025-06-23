@@ -68,3 +68,8 @@ button:hover {
   color: red;
   font-size: 0.9rem;
 }
+
+a {
+  color: lightblue;
+  text-decoration: none;
+}

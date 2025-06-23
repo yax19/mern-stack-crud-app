@@ -8,15 +8,19 @@
 </head>
 <body>
   <div class="dashboard">
-    <h2>Welcome Back! 💪</h2>
+    <h2>Welcome Back! 💪
+          <div class="logout-container">
+      <button id="logoutBtn" class="fancy-btn logout">Logout</button>
+    </div>
+    </h2>
 
     <!-- Workout Summary -->
     <section class="summary">
-      <h3>Workout Summary</h3>
-      <p>Total Workouts: <span id="totalWorkouts">0</span></p>
-      <p>Total Sets: <span id="totalSets">0</span></p>
-      <p>Total Reps: <span id="totalReps">0</span></p>
-      <a href="challenge.html">🎯 Challenge</a>
+      <h3>Don't Forget To Warm UP</h3>
+     <p>Streachs, Push-ups, Light Pull-ups</p>
+      <p>Light 0.5 mile run </p>
+      <p>Light dumbbell chest press </p>
+      <a href="challenge.html">🎯 Need A Challenge ?</a>
     </section>
 
     <!-- Weekly Routine Dropdown -->
@@ -44,16 +48,53 @@
 </div>
 
 <!-- Workout Suggestion -->
-<div class="section suggestion-section">
+<section class="workout-suggestions">
   <h3>Need a Workout?</h3>
-  <button id="suggestBtn" class="fancy-btn">🎯 Suggest Workout</button>
-  <p id="suggestionText" class="suggestion-text"></p>
-</div>
-    <!-- Logout -->
-    <div class="logout-container">
-      <button id="logoutBtn" class="fancy-btn logout">Logout</button>
+  <div class="suggestion-grid">
+    <div class="workout-card">
+      <h4>Arms</h4>
+      <ul>
+        <li>Bicep Curls</li>
+        <li>Tricep Dips</li>
+        <li>Hammer Curls</li>
+      </ul>
+    </div>
+    <div class="workout-card">
+      <h4>Legs</h4>
+      <ul>
+        <li>Squats</li>
+        <li>Lunges</li>
+        <li>Leg Press</li>
+      </ul>
+    </div>
+    <div class="workout-card">
+      <h4>Core</h4>
+      <ul>
+        <li>Plank</li>
+        <li>Russian Twists</li>
+        <li>Leg Raises</li>
+      </ul>
+    </div>
+    <div class="workout-card">
+      <h4>Cardio</h4>
+      <ul>
+        <li>Jump Rope</li>
+        <li>Running</li>
+        <li>Mountain Climbers</li>
+      </ul>
+    </div>
+    <div class="workout-card">
+      <h4>Chest</h4>
+      <ul>
+        <li>Bench Press</li>
+        <li>Push-Ups</li>
+        <li>Dumbbell Flys</li>
+      </ul>
+      
     </div>
   </div>
+</section>
+
 
   <div id="stopwatchModal" class="modal hidden">
   <h3>⏱️ Stopwatch</h3>

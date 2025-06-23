@@ -305,3 +305,50 @@ button:hover,
   box-shadow: 0 0 15px #00ffa2;
 }
 
+a {
+  color: lightblue;
+  text-decoration: none;
+}
+
+.workout-suggestions {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 255, 153, 0.2);
+  text-align: center;
+}
+
+.suggestion-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.workout-card {
+  background: #222;
+  color: #e5ffe0;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 160px;
+  box-shadow: 0 0 6px rgba(0, 255, 153, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.workout-card:hover {
+  transform: scale(1.05);
+}
+
+.workout-card h4 {
+  margin-bottom: 0.5rem;
+  color: #00ff99;
+}
+
+.workout-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
