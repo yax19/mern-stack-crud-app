@@ -78,7 +78,7 @@ document.getElementById('resetTimer').addEventListener('click', () => {
   async function fetchWorkouts() {
     workoutList.innerHTML = '';
     try {
-      const res = await fetch('/api/workouts', {
+      const res = await fetch('https://personal-training-app-backend.onrender.com/api/workouts', {
         headers: {
           Authorization: 'Bearer ' + token
         }
