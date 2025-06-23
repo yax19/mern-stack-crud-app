@@ -1,3 +1,4 @@
+const baseUrl = import.meta.env.VITE_BACKEND_URL || '';
 document.addEventListener('DOMContentLoaded', function () {
   const token = localStorage.getItem('token');
   if (!token) {
