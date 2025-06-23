@@ -1,4 +1,3 @@
-const baseUrl = import.meta.env.VITE_BACKEND_URL || '';
 document.addEventListener('DOMContentLoaded', function () {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -61,8 +60,6 @@ document.getElementById('resetTimer').addEventListener('click', () => {
   clearInterval(timerInterval);
   hours = minutes = seconds = 0;
   timerDisplay.textContent = '00:00:00';
-
-  
 });
 
   logoutBtn.addEventListener('click', function () {
@@ -79,7 +76,7 @@ document.getElementById('resetTimer').addEventListener('click', () => {
   async function fetchWorkouts() {
     workoutList.innerHTML = '';
     try {
-      const res = await fetch('https://personal-training-app-backend.onrender.com/api/workouts', {
+      const res = await fetch('/api/workouts', {
         headers: {
           Authorization: 'Bearer ' + token
         }
@@ -157,7 +154,6 @@ checks.forEach(check => {
       list.appendChild(li);
     });
   }
-
 
   
   function showQuote() {

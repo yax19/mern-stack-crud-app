@@ -1,5 +1,3 @@
-const baseUrl = import.meta.env.VITE_BACKEND_URL || '';
-
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('loginForm');
   const errorEl = document.getElementById('error');
@@ -11,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = document.getElementById('password').value;
 
     try {
-      const res = await fetch(baseUrl + '/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      const res = await fetch('/api/auth/signin', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password })
+});
 
       const data = await res.json();
 
