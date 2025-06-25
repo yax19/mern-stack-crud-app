@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://personal-training-appyaya-58071facf6cd.herokuapp.com/api/$1"
+    }
+  ]
+}
